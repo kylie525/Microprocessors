@@ -1,0 +1,37 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "FFCLK",
+					"strict" : false
+				},
+				{
+					"name" : "BufferEN",
+					"strict" : false
+				},
+				{
+					"name" : "WE_L",
+					"strict" : false
+				},
+				{
+					"name" : "PH6",
+					"strict" : false
+				},
+				{
+					"name" : "PK[7]",
+					"strict" : false
+				},
+				{
+					"name" : "PK[6]",
+					"strict" : false
+				},
+				{
+					"name" : "RE_L",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,16 @@
+|Lab4
+FFCLK <= inst3.DB_MAX_OUTPUT_PORT_TYPE
+PH6 => inst.IN0
+PK[0] => inst4[0].IN0
+PK[1] => inst4[1].IN0
+PK[2] => inst4[2].IN0
+PK[3] => inst4[3].IN0
+PK[4] => inst4[4].IN0
+PK[5] => inst4[5].IN0
+PK[6] => inst4[6].IN0
+PK[7] => inst4[7].IN0
+WE_L => inst3.IN1
+BufferEN <= inst2.DB_MAX_OUTPUT_PORT_TYPE
+RE_L => inst2.IN1
+
+

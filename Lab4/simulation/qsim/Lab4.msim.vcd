@@ -1,0 +1,381 @@
+$comment
+	File created using the following command:
+		vcd file Lab4.msim.vcd -direction
+$end
+$date
+	Tue Jun 20 13:20:03 2023
+$end
+$version
+	ModelSim Version 10.5b
+$end
+$timescale
+	1ps
+$end
+
+$scope module Lab4_vlg_vec_tst $end
+$var reg 1 ! PH6 $end
+$var reg 8 " PK [7:0] $end
+$var reg 1 # RE_L $end
+$var reg 1 $ WE_L $end
+$var wire 1 % BufferEN $end
+$var wire 1 & FFCLK $end
+
+$scope module i1 $end
+$var wire 1 ' gnd $end
+$var wire 1 ( vcc $end
+$var wire 1 ) unknown $end
+$var tri1 1 * devclrn $end
+$var tri1 1 + devpor $end
+$var tri1 1 , devoe $end
+$var wire 1 - PK[5]~input_o $end
+$var wire 1 . PK[4]~input_o $end
+$var wire 1 / PK[3]~input_o $end
+$var wire 1 0 PK[2]~input_o $end
+$var wire 1 1 PK[1]~input_o $end
+$var wire 1 2 PK[0]~input_o $end
+$var wire 1 3 ~QUARTUS_CREATED_GND~I_combout $end
+$var wire 1 4 ~QUARTUS_CREATED_UNVM~~busy $end
+$var wire 1 5 FFCLK~output_o $end
+$var wire 1 6 BufferEN~output_o $end
+$var wire 1 7 PH6~input_o $end
+$var wire 1 8 WE_L~input_o $end
+$var wire 1 9 PK[7]~input_o $end
+$var wire 1 : PK[6]~input_o $end
+$var wire 1 ; inst3~combout $end
+$var wire 1 < RE_L~input_o $end
+$var wire 1 = inst2~combout $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+0!
+b11000000 "
+0#
+0$
+0%
+0&
+0'
+1(
+x)
+1*
+1+
+1,
+0-
+0.
+0/
+00
+01
+02
+03
+z4
+05
+06
+07
+08
+19
+1:
+0;
+0<
+0=
+$end
+#10000
+1$
+18
+1;
+15
+1&
+#20000
+1#
+0$
+08
+1<
+0;
+1=
+16
+05
+0&
+1%
+#30000
+1$
+18
+1;
+15
+1&
+#40000
+1!
+0#
+0$
+08
+0<
+17
+0;
+0=
+06
+05
+0&
+0%
+#50000
+1$
+18
+1;
+15
+1&
+#60000
+1#
+0$
+08
+1<
+0;
+1=
+16
+05
+0&
+1%
+#70000
+1$
+18
+1;
+15
+1&
+#80000
+b1000000 "
+b0 "
+0!
+0#
+0$
+08
+0<
+07
+09
+0:
+#90000
+1$
+18
+#100000
+1#
+0$
+08
+1<
+#110000
+1$
+18
+#120000
+1!
+0#
+0$
+08
+0<
+17
+0;
+0=
+06
+05
+0&
+0%
+#130000
+1$
+18
+1;
+15
+1&
+#140000
+1#
+0$
+08
+1<
+0;
+1=
+16
+05
+0&
+1%
+#150000
+1$
+18
+1;
+15
+1&
+#160000
+b1000000 "
+0!
+0#
+0$
+08
+0<
+07
+1:
+0;
+0=
+06
+05
+0&
+0%
+#170000
+1$
+18
+1;
+15
+1&
+#180000
+1#
+0$
+08
+1<
+0;
+1=
+16
+05
+0&
+1%
+#190000
+1$
+18
+1;
+15
+1&
+#200000
+1!
+0#
+0$
+08
+0<
+17
+0;
+0=
+06
+05
+0&
+0%
+#210000
+1$
+18
+1;
+15
+1&
+#220000
+1#
+0$
+08
+1<
+0;
+1=
+16
+05
+0&
+1%
+#230000
+1$
+18
+1;
+15
+1&
+#240000
+b11000000 "
+b10000000 "
+0!
+0#
+0$
+08
+0<
+07
+19
+0:
+0;
+0=
+06
+05
+0&
+0%
+#250000
+1$
+18
+1;
+15
+1&
+#260000
+1#
+0$
+08
+1<
+0;
+1=
+16
+05
+0&
+1%
+#270000
+1$
+18
+1;
+15
+1&
+#280000
+1!
+0#
+0$
+08
+0<
+17
+0;
+0=
+06
+05
+0&
+0%
+#290000
+1$
+18
+1;
+15
+1&
+#300000
+1#
+0$
+08
+1<
+0;
+1=
+16
+05
+0&
+1%
+#310000
+1$
+18
+1;
+15
+1&
+#320000
+b11000000 "
+0!
+0#
+0$
+08
+0<
+07
+1:
+0;
+0=
+06
+05
+0&
+0%
+#330000
+1$
+18
+1;
+15
+1&
+#340000
+1#
+0$
+08
+1<
+0;
+1=
+16
+05
+0&
+1%
+#350000

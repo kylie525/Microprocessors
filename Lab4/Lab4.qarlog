@@ -1,0 +1,16 @@
+Quartus Prime Archive log --	D:/School/Summer 2023/EEL4744/Atmel Studio/Lab4/Lab4.qarlog
+
+Archive:	D:/School/Summer 2023/EEL4744/Atmel Studio/Lab4/Lab4.qar
+Date:		Tue Jun 20 18:39:18 2023
+Quartus Prime		19.1.0 Build 670 09/22/2019 SJ Lite Edition
+
+	=========== Files Selected: ===========
+D:/School/Summer 2023/EEL4744/Atmel Studio/Lab4/Lab4.bdf
+D:/School/Summer 2023/EEL4744/Atmel Studio/Lab4/Lab4.qpf
+D:/School/Summer 2023/EEL4744/Atmel Studio/Lab4/Lab4.qsf
+D:/School/Summer 2023/EEL4744/Atmel Studio/Lab4/Waveform.vwf
+c:/intelfpga_lite/19.1/quartus/bin64/assignment_defaults.qdf
+	======= Total: 5 files to archive =======
+
+	================ Status: ===============
+All files archived successfully.

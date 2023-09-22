@@ -1,0 +1,167 @@
+;************************************************************************
+; lab5_7.asm
+;
+; Name: Kylie Lennon
+; Class #: 11319
+; PI Name: Timothy Carpenter
+; Description: Echo inputted characters with an inturrupt while 
+;				constantly toggling the blue LED
+;
+;************************************************************************
+
+;*********************************INCLUDES*******************************
+.include "ATxmega128a1udef.inc"
+;***********END OF INCLUDES******************************
+
+;*********************************EQUATES********************************
+.equ BIT0_bm = 0x01 << 0
+.equ BIT1_bm = 0x01 << 1
+.equ BIT2_bm = 0x01 << 2
+.equ BIT3_bm = 0x01 << 3
+.equ BIT4_bm = 0x01 << 4
+.equ BIT5_bm = 0x01 << 5
+.equ BIT6_bm = 0x01 << 6
+.equ BIT7_bm = 0x01 << 7
+
+.equ CR = 13	; carrige return. could also use '/r'
+.equ LF = 10	; line feed. could also use '/n'
+.equ BS = 0x08	; backspace
+.equ DEL = 0x7F	; delete
+
+;***********END OF EQUATES*******************************
+
+;***********MEMORY CONFIGURATION*************************
+; program memory constants (if necessary)
+.cseg
+.org USARTD0_RXC_vect
+	rjmp ECHO_INTR
+
+; data memory allocation (if necessary)
+.dseg
+
+;***********END OF MEMORY CONFIGURATION***************
+
+;***********MAIN PROGRAM*******************************
+.cseg
+.org 0x0
+	rjmp MAIN
+
+.org 0x100
+MAIN:
+; initialize MCU components like the stack
+	ldi r16, 0xFF
+	sts CPU_SPL, r16
+	ldi r16, 0X3F
+	sts CPU_SPH, r16
+; initialize the USART
+	rcall INIT_USART
+; initialize the blue LED
+	ldi r16, BIT6_bm
+	sts PORTD_DIRSET, r16
+
+LOOP:
+; toggle blue LED
+	ldi r16, BIT6_bm
+	sts PORTD_OUTTGL, r16
+	rjmp LOOP
+
+;***********END OF MAIN PROGRAM **********************
+/************************************************************************************
+* Name: INIT_USART
+* Purpose: Subroutine to initialize Port D pin3 for output (PORTD0 TX)
+*			and Port D pin2 for inout (PORTD0 Rx). Initialize USARTD0 TX and RX
+*			72000 BAUD, 8 data bits, 1 stop bit, 1 start bit, odd parity
+* Inputs: None
+* Outputs: None
+* Destroys: r16
+* Reg Used: PORTD_DIR, PORTD_OUT, USARTD0_CTRLB, USARTD0_CTRLC, USARTD0_BAUDCTRLA,
+*			USARTD0_BAUDCTRLB, USARTD0_CTRLB, PMIC_CTRL
+* Calls: None
+***********************************************************************************/
+INIT_USART:
+; Set the Tx line to default to '1' idle
+; Set PortD_PIN3 as output for TX pin of USARTDO
+	ldi r16, BIT3_bm
+	sts PORTD_OUTSET, r16
+	sts PORTD_DIRSET, r16
+
+; Set PortD_PIN2 as inout for RX pin of USARTD0
+	ldi r16, BIT2_bm
+	sts PORTD_DIRCLR, r16
+
+; equate statements for BSel and BScale
+.equ BSel = 9
+.equ BScale = -3	; 72000 Hz
+
+; set parity mode to odd, 8 bit frame, 1 stop bit
+	ldi r16, (USART_PMODE_ODD_gc | \
+				USART_CMODE_ASYNCHRONOUS_gc | \
+				USART_CHSIZE_8BIT_gc)
+	sts USARTD0_CTRLC, r16
+
+; initialize baud rate
+; set BAUDCTRLA with only the lower 8 bits of BSel
+	ldi r16, low(BSel)
+	sts USARTD0_BAUDCTRLA, r16
+
+; set BAUDCTRLB to BScale(4 bits) | BSel (upper 4 bits)
+	ldi r16, ( (BScale <<4) | high(BSel) )
+	sts USARTD0_BAUDCTRLB, r16
+	
+; enable TX and RX
+	ldi r16, (BIT4_bm | BIT3_bm)
+	sts USARTD0_CTRLB, r16
+
+; set RXC as a high level interrupt
+	ldi r16, (BIT4_bm | BIT5_bm) ; bits 4 and 5 are RXCINTLVL
+	sts USARTD0_CTRLA, r16
+
+; enable high level interrupts
+	ldi r16, PMIC_HILVLEN_bm
+	sts PMIC_CTRL, r16
+
+; enable global interrupts
+	sei
+
+; return
+	ret
+
+/************************************************************************************
+* Name: ECHO_INTR
+* Purpose: Echo the inputted character
+* Inputs: None
+* Outputs: None
+* Destroys: USARTD0_DATA
+* Reg Used: r16, CPU_SREG, r17, USARTD0_DATA, USARTD0_STATUS
+* Calls: None
+***********************************************************************************/
+ECHO_INTR:
+; save affected registers
+	push r16
+	push r17
+; saves status register
+	lds r16, CPU_SREG
+	push r16
+
+; read the character into r16
+	lds r16, USARTD0_DATA
+
+TX_POLL:
+; load status register
+	lds r17, USARTD0_STATUS
+; check if the data register empty flag (DREIF) is set (to send out a character)
+; else go back to polling
+	sbrs r17, USART_DREIF_bp ; bit 5
+	rjmp TX_POLL
+
+; send the character out over the USART
+	sts USARTD0_DATA, r16
+
+; restores status register
+	pop r16
+	sts CPU_SREG, r16
+; restores saved registers
+	pop r17
+	pop r16
+; return
+	reti
